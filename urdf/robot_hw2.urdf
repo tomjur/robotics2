@@ -1,0 +1,197 @@
+<?xml version="1.0"?>
+<robot name="myfirst">
+
+  <material name="blue">
+    <color rgba="0 0 0.8 1"/>
+  </material>
+  <material name="black">
+    <color rgba="0 0 0 1"/>
+  </material>
+  <material name="white">
+    <color rgba="1 1 1 1"/>
+  </material>
+
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 0.05" rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.1" radius="0.5"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.05" rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.1" radius="0.5"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="link1">
+    <visual>
+      <origin xyz="0 0 0.4" rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.8" radius="0.05"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.4" rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.8" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="base_joint" type="revolute">
+    <axis xyz="0 0 1"/>
+    <limit effort="1000.0" lower="-3.14" upper="3.14" velocity="0.5"/>
+    <origin rpy="0 0 0" xyz="0 0 0.1"/>
+    <parent link="base_link"/>
+    <child link="link1"/>
+  </joint>
+
+  <link name="link2">
+    <visual>
+      <origin xyz="0 0 0.4" rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.8" radius="0.05"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.4" rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.8" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="shoulder" type="revolute">
+    <axis xyz="1 0 0"/>
+    <limit effort="1000.0" lower="-3.14" upper="3.14" velocity="0.5"/>
+    <origin rpy="0 0 0" xyz="0.1 0 0.8"/>
+    <parent link="link1"/>
+    <child link="link2"/>
+  </joint>
+
+  <link name="link3">
+    <visual>
+      <origin xyz="0 0 0.4" rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.8" radius="0.05"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.4" rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.8" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="elbow" type="revolute">
+    <axis xyz="1 0 0"/>
+    <limit effort="1000.0" lower="-3.14" upper="3.14" velocity="0.5"/>
+    <origin rpy="0 0 0" xyz="-0.1 0 0.8"/>
+    <parent link="link2"/>
+    <child link="link3"/>
+  </joint>
+
+  <link name="link4">
+    <visual>
+      <origin xyz="0 0 0.15" rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.3" radius="0.025"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.15" rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.3" radius="0.025"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="wrist1" type="revolute">
+    <axis xyz="0 0 1"/>
+    <limit effort="1000.0" lower="-3.14" upper="3.14" velocity="0.5"/>
+    <origin rpy="0 0 0" xyz="0.0 0 0.8"/>
+    <parent link="link3"/>
+    <child link="link4"/>
+  </joint>
+
+  <link name="link5">
+    <visual>
+      <origin xyz="0 0 0.15" rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.3" radius="0.025"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.15" rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.3" radius="0.025"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="wrist2" type="revolute">
+    <axis xyz="1 0 0"/>
+    <limit effort="1000.0" lower="-3.14" upper="3.14" velocity="0.5"/>
+    <origin rpy="0 0 0" xyz="0.05 0 0.3"/>
+    <parent link="link4"/>
+    <child link="link5"/>
+  </joint>
+
+  <link name="link6">
+    <visual>
+      <origin xyz="0 0 0.15" rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.3" radius="0.025"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.15" rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.3" radius="0.025"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="wrist3" type="revolute">
+    <axis xyz="0 0 1"/>
+    <limit effort="1000.0" lower="-3.14" upper="3.14" velocity="0.5"/>
+    <origin rpy="0 0 0" xyz="0.0 0 0.3"/>
+    <parent link="link5"/>
+    <child link="link6"/>
+  </joint>
+
+  <link name="end-effector-link">
+    <visual>
+      <origin xyz="0 0 0.025" rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.05" radius="0.025"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.025" rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.05" radius="0.025"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="fixed1" type="fixed">
+    <axis xyz="0 0 1"/>
+    <origin rpy="0 0 0" xyz="0 0 0.3"/>
+    <parent link="link6"/>
+    <child link="end-effector-link"/>
+  </joint>
+
+</robot>
